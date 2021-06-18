@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static java.util.Arrays.asList;
 
@@ -39,6 +40,13 @@ public class MethodReferences {
         BiPredicate<List<String>, String> contains = (lista, elemento) -> lista.contains(elemento);
         BiPredicate<List<String>, String> contains2 = List::contains;
         System.out.println(contains2.test(nomes, "Willian"));
-        
+
+        // 4- References to a constructor
+        Supplier<ComparadorCarro> comparadorCarroSupplier = ComparadorCarro::new;
+        System.out.println(comparadorCarroSupplier.get()); // Precisa utilizar o .get() para chamar a nova instancia
+
+        BiFunction<String, Integer, Carro> carroBiFunction = (s, i) -> new Carro(s, i);
+        BiFunction<String, Integer, Carro> carroBiFunction2 = Carro::new;
+        System.out.println(carroBiFunction2.apply("Rosa",  1998));
     }
 }
